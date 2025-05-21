@@ -1,7 +1,7 @@
 from datetime import date
-from src.models.time import Time
-from src.models.estadio import Estadio
-from src.models.resultado import Resultado
+from .time import Time
+from .estadio import Estadio
+from .resultado import Resultado
 
 class Partida:
     def __init__(self, mandante: Time, visitante: Time, estadio: Estadio, data: date):
