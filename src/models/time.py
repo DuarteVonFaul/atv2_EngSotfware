@@ -1,10 +1,26 @@
-from .jogador import Jogador
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 
-class Time:
-    def __init__(self, nome: str, estadio_sede):
+from .jogador import Jogador  # usa a mesma Base declarativa do Jogador
+
+from . import *
+
+class Time(Base):
+    __tablename__ = 'times'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String(100), nullable=False)
+    #Relacionamento com Estadio
+    estadio_id = Column(Integer, ForeignKey('estadios.id'), nullable=False)
+    estadio_sede = relationship("Estadio")
+    campeonatos = relationship("Campeonato", secondary=campeonato_time, back_populates="times")
+
+    # Relacionamento com jogadores
+    jogadores = relationship("Jogador", back_populates="time", cascade="all, delete-orphan")
+
+    def __init__(self, nome: str, estadio_sede: str):
         self.nome = nome
         self.estadio_sede = estadio_sede
-        self.jogadores = []
 
     def adicionar_jogador(self, jogador: Jogador):
         if jogador in self.jogadores:
