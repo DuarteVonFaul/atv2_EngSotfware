@@ -16,10 +16,7 @@ class Campeonato(Base):
     nome = Column(String(100), nullable=False)
     ano = Column(Integer, nullable=False)
 
-    # Relacionamento muitos-para-muitos com Time
     times = relationship("Time", secondary=campeonato_time, back_populates="campeonatos")
-
-    # Relacionamento um-para-muitos com Partida
     partidas = relationship("Partida", back_populates="campeonato", cascade="all, delete-orphan")
 
     def __init__(self, nome: str, ano: int):

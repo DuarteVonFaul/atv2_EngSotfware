@@ -8,7 +8,6 @@ class Resultado(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     num_gols_mandante = Column(Integer, nullable=False)
     num_gols_visitante = Column(Integer, nullable=False)
-
     partida_id = Column(Integer, ForeignKey('partidas.id'), unique=True)
     partida = relationship("Partida", back_populates="resultado")
 
