@@ -12,6 +12,8 @@ class Jogador(Base):
     data_nascimento = Column(Date, nullable=False)
     altura = Column(Float, nullable=False)
 
+    estatisticas = relationship("Estatisticas", uselist=False, back_populates="jogador")
+
     time_id = Column(Integer, ForeignKey('times.id'))
     time = relationship("Time", back_populates="jogadores")
 

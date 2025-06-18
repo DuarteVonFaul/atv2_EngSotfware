@@ -5,3 +5,4 @@ from ..src.models.jogador import Jogador
 from ..src.models.partida import Partida
 from ..src.models.resultado import Resultado
 from ..src.database import Database
+from ..src.models.Estatisticas import Estatisticas

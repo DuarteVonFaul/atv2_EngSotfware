@@ -3,6 +3,7 @@ from . import Jogador, Time, Estadio
 from datetime import date
 
 from datetime import date
+import pytest
 
 
 def test_time_database_insert(session):
@@ -34,6 +35,6 @@ def test_time_database_insert_same_name(session):
 
 
 
-    assert service.criar(Time('Flamengo', Estadio('Maracana', 'Rio de Janeiro'))) == ValueError(f"Já existe um time com o nome 'Flamengo' ou com o mesmo estádio.")
-
+    with pytest.raises(ValueError, match="Já existe um time com o nome 'Flamengo' ou com o mesmo estádio"):
+        service.criar(Time('Flamengo', Estadio('Maracana', 'Rio de Janeiro')))
     ...
